@@ -1,0 +1,174 @@
+<script>  
+    var dob = new Date("06/24/2008");  
+     
+    var month_diff = Date.now() - dob.getTime();  
+      
+     
+    var age_dt = new Date(month_diff);   
+      
+    //extract year from date      
+    var year = age_dt.getUTCFullYear();  
+      
+    
+    var age = Math.abs(year - 1970);  
+      
+     
+    document.write("Age of the date entered: " + age + " years");  
+</script>
+
+
+
+
+
+<script>
+function validate(age){
+      var ans="not eigible";
+        if(age>=18){
+           ans="eligible";
+        }
+        return(ans);
+        }
+    </script>
+<body>
+    <script>
+        var age=19;
+        var status=validate(age);
+        document.write("You are "+status+" for Vote");
+    </script>
+</body>
+
+
+
+
+
+function leapyear(year)
+{
+
+if((year % 400 == 0) || (year % 4 == 0) && (year % 100 != 0);{
+alert(year+ "leap year");
+}else{
+alert(year+ "not leap year");
+
+}
+console.log(leapyear(2000));
+console.log(leapyear(1700));
+console.log(leapyear(1800));
+console.log(leapyear(100));
+
+
+
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="utf-8">
+<title>JavaScript Form Validation using a sample registration form</title>
+<link rel='stylesheet' href='js-form-validation.css' type='text/css' />
+<script src="sample-registration-form-validation.js"></script>
+</head>
+<body onload="document.registration.userid.focus();">
+<h1>Registration Form</h1>
+Use tab keys to move from one input field to the next.
+<form name='registration' onSubmit="return formValidation();">
+<ul>
+<li><label for="age">age:</label></li>
+<li><input type="text" name="age" size="20" /></li>
+<li><label for="email">Email:</label></li>
+<li><input type="text" name="email" size="50" /></li>
+<li><label for="username">Name:</label></li>
+<li><input type="text" name="username" size="50" /></li>
+<li><label for="mobile">mobile:</label></li>
+<li><input type="mobile" name="mobile" size="20" /></li>
+
+
+
+<li><label for="desc">About:</label></li>
+<li><textarea name="desc" id="desc"></textarea></li>
+<li><input type="submit" name="submit" value="Submit" /></li>
+</ul>
+</form>
+</body>
+</html>
+
+
+function formValidation()
+{
+var uid = document.registration.age;
+var passid = document.registration.uemail;
+var uname = document.registration.mob;
+
+if(age_val(age))
+{
+if(ValidateEmail(uemail))
+{
+if(allLetter(uname))
+{
+if(mobile(mob))
+{
+}
+}
+}
+}
+return false;
+}
+
+function age_val(age)
+{
+if(age > 18)
+{
+alert("age is valid"+ age);
+return true;
+}
+else{
+alert("not valid age");
+age.focus();
+return false;
+}
+}
+
+
+function ValidateEmail(uemail)
+{
+var mailformat = /^\w+([\.-]?\w+)@\w+([\.-]?\w+)(\.\w{2,3})+$/;
+if(uemail.value.match(mailformat))
+{
+return true;
+}
+else
+{
+alert("You have entered an invalid email address!");
+uemail.focus();
+return false;
+}
+}
+
+function mobile(mob)
+{
+var mob_len =mob.value.length;
+if(mob_len == 10)
+{
+return true;
+}
+else{
+alert("enter 10 digit number");
+mob.focus();
+return false;
+}
+}
+
+
+
+function allLetter(uname)
+{ 
+var letters = /^[A-Za-z]+$/;
+if(uname.value.match(letters))
+{
+return true;
+}
+else
+{
+alert('Username must have alphabet characters only');
+uname.focus();
+return false;
+}
+}
+
+
