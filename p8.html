@@ -1,0 +1,56 @@
+<html>    
+    <head>    
+    <title>    
+        Simple Calculator    
+    </title>    
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>    
+    <script>      
+        $(document).ready(function(){    
+            $("#Add").on('click',function(){    
+                sum();    
+            });    
+            $("#Sub").on('click',function(){    
+                Sub1();    
+            })    
+            $("#Mul").on('click',function(){    
+                Mul1();    
+            })    
+            $("#Div").on('click',function(){    
+                Div1();    
+            })    
+        });    
+        function sum(){    
+         var no1=parseInt($("#N1").val());    
+         var no2=parseInt($("#N2").val());    
+         var result =no1+no2;    
+          alert("The result is "+result);    
+        }    
+        function Sub1(){    
+         var no1=parseInt($("#N1").val());    
+         var no2=parseInt($("#N2").val());    
+         var result =no1-no2;    
+          alert("The result is "+result);    
+        }    
+        function Mul1(){    
+         var no1=parseInt($("#N1").val());    
+         var no2=parseInt($("#N2").val());    
+         var result =no1*no2;    
+          alert("The result is "+result);    
+        }    
+        function Div1(){    
+         var no1=parseInt($("#N1").val());    
+         var no2=parseInt($("#N2").val());    
+         var result =no1/no2;    
+          alert("The result is "+result);    
+        }    
+    </script>    
+    </head>    
+    <body>    
+       1st Number <input type="text" id="N1" placeholder="Enter num"><br>    
+       2nd Number<input type="text" id="N2"  placeholder="Enter num"><br>    
+        <input type="button" id="Add" value="sum">
+        <input type="button" id="Sub" value="Sub1">    
+        <input type="button" id="Mul" value="Mul1">  
+        <input type="button" id="Div" value="Div1">    
+    </body>    
+    </html>   

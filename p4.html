@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head><title>JQuery Assignments</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script type="text/javascript">
+class Rectangle{
+    constructor(height,width)
+    {
+        this.height=height;
+        this.width=width;
+    }
+    calc()
+    {
+        return parseInt(this.height)*parseInt(this.width);
+    }
+    display()
+    {
+        return parseInt(this.calc());
+    }
+} 
+$(document).ready(function(){
+    $("#a1").click(function(){
+        var rect=new Rectangle(($("#height").val()),($("#width").val()));
+        $("#id1").html("Area of rectangle is :"+rect.display());
+    });
+   
+});
+</script>
+</head>
+<body>
+<div>
+<h1>area of triangle and rectangle </h1>
+Height <input type="number" id="height">
+<br><br>
+Width <input type="number" id="width">
+<br><br><button id="a1"> Result</button>
+<p id="id1" style="font-size: 22px; "></p>
+</div>
+
+</body>
+</html>
