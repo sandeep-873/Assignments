@@ -1,0 +1,290 @@
+Controller :
+###############
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Web.Mvc;
+
+namespace A8P1.Controllers
+{
+    public class EmployeeController : Controller
+    {
+        // GET: Employee
+        public ActionResult Index()
+        {
+            return View();
+        }
+        
+        public ActionResult Index2()
+        {
+            return View();
+        }
+    }
+}
+
+
+
+
+
+EMPmodel :
+#############
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+
+namespace A8P1.Models
+{
+    public class EMPmodel
+    {
+        public int ID { get; set; }
+        public string Name { get; set; }
+        public int Age { get; set; }
+        public String City { get; set; }
+    }
+}
+
+
+
+Index view :
+#################
+
+
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+</head>
+<body>
+    <h1>Employee Details</h1>
+    <div>
+
+        @Html.Label("L1", "ID")
+        @Html.TextBox("Text1", "ID")
+    </div>
+    <div>
+
+        @Html.Label("L1", "FName")
+        @Html.TextBox("Text1", "Enter the Name")
+    </div>
+
+    @Html.Label("L1", "Age")
+    @Html.TextBox("Text1", "Enter the Age")
+    <div>
+        @Html.Label("L1", "City")
+        @Html.TextBox("Text1", "Enter the City")
+    </div>
+    <div>
+        @Html.Label("Gender")
+        @Html.RadioButton("n1", "Male")
+        @Html.Label("Male")
+    </div>
+    <div>
+        @Html.RadioButton("n2", "Female")
+        @Html.Label("Female")
+    </div>
+    <div>
+        @Html.Label("Enter the Address")
+        @Html.TextArea("Address")
+    </div>
+</body>
+</html>
+
+
+
+
+
+Index2 view :
+###########
+
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index2</title>
+</head>
+<body>
+    <div>
+
+        @Html.Label("L1", "ID")
+        @Html.TextBox("Text1", "ID")
+    </div>
+    <div>
+
+        @Html.Label("L1", "FName")
+        @Html.TextBox("Text1", "Enter the Name")
+    </div>
+
+    @Html.Label("L1", "Age")
+    @Html.TextBox("Text1", "Enter the Age")
+    <div>
+        @Html.Label("L1", "City")
+        @Html.TextBox("Text1", "Enter the City")
+
+
+    </div>
+</body>
+</html>
+
+
+
+
+A82)
+Controller :
+############
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Web.Mvc;
+using A8P2.Models;
+
+namespace A8P2.Controllers
+{
+    public class Home1Controller : Controller
+    {
+
+        // GET: Home1
+        public ActionResult Index(User p)
+        {
+            if (ModelState.IsValid)
+            {
+                return RedirectToAction("Index");
+            }
+            return View(p);
+        }   
+    }
+}
+
+
+
+User Model:
+############
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.ComponentModel.DataAnnotations;
+
+namespace A8P2.Models
+{
+    public class User
+    {
+        public int UserId { get; set; }
+        [Required(ErrorMessage = "Name should be Required")]
+        public string UserName { get; set; }
+        [Required(ErrorMessage = "Age should be Required")]
+        [Range(18, 100, ErrorMessage = "Age should be Required")]
+        public string Age { get; set; }
+        [Required(ErrorMessage = "Email should be Required")]
+        [RegularExpression(@"[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}", ErrorMessage = "Please enter Valid Email ID")]
+        public string Email { get; set; }
+        [Required(ErrorMessage = "Number should be Required")]
+        [RegularExpression(@"^([0-9]{10})$", ErrorMessage = "Please Enter Valid Mobile Number.")]
+        public string Mobile { get; set; }
+    }
+}
+
+
+
+
+Index view :
+###############
+@model A8P2.Models.User
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+    
+        <meta name="viewport" content="width=device-width" />
+        <title>Index</title>
+        <style>
+            .col-md-10 {
+                color: orangered;
+            }
+        </style>
+    
+        
+
+</head>
+<body>
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-horizontal">
+            <h4>User</h4>
+            <hr />
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            <div class="form-group">
+                @Html.LabelFor(model => model.UserName, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10" >
+                    @Html.EditorFor(model => model.UserName, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.UserName, "", new { @class = "text-danger" })
+                    
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Age, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Age, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Age, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Mobile, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Mobile, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Mobile, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="Create" class="btn btn-default" />
+                    
+                </div>
+            </div>
+        </div>
+    }
+
+    <div>
+        @Html.ActionLink("Back to List", "Index")
+    </div>
+</body>
+</html>
