@@ -1,0 +1,106 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Web.Services;
+using System.Data.SqlClient;
+using System.Xml;
+using System.Data;
+namespace WEBSAMPLE
+{
+    /// <summary>
+    /// Summary description for Sample
+    /// </summary>
+    [WebService(Namespace = "http://tempuri.org/")]
+    [WebServiceBinding(ConformsTo = WsiProfiles.BasicProfile1_1)]
+    [System.ComponentModel.ToolboxItem(false)]
+    // To allow this Web Service to be called from script, using ASP.NET AJAX, uncomment the following line. 
+    // [System.Web.Script.Services.ScriptService]
+    public class Sample : System.Web.Services.WebService
+    {
+
+        [WebMethod]
+        public string HelloWorld()
+        {
+            return "Hello World";
+        }
+        [WebMethod]
+        public void db_insert(string p, string q, string r, int s)
+        {
+            SqlConnection con = new SqlConnection("Data Source=DESKTOP-569IDC;Initial Catalog=Sample;Integrated Security=True");
+            con.Open();
+            SqlCommand cmd = new SqlCommand("insert into Student values(@a,@b,@c,@d)", con);
+            cmd.Parameters.AddWithValue("a", p);
+            cmd.Parameters.AddWithValue("b", q);
+            cmd.Parameters.AddWithValue("c", r);
+            cmd.Parameters.AddWithValue("d", s);
+            cmd.ExecuteNonQuery();
+        }
+        [WebMethod]
+        public string Get_student()
+        {
+            SqlConnection con = new SqlConnection("Data Source=DESKTOP-569IDC;Initial Catalog=Sample;Integrated Security=True");
+            con.Open();
+            SqlCommand cmd = new SqlCommand("select * from Student", con);
+            cmd.ExecuteNonQuery();
+            SqlDataAdapter da = new SqlDataAdapter(cmd);
+            DataSet ds = new DataSet();
+            da.Fill(ds);
+            con.Close();
+            string str = ds.GetXml();
+            return str;
+
+        }
+
+
+    }
+}
+
+
+
+WebForm1.aspx.cs
+#################
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Web.UI;
+using System.Xml;
+using System.Data;
+using System.Web.UI.WebControls;
+using WEBSAMPLE.ServiceReference1;
+namespace WEBSAMPLE
+{
+    public partial class WebForm1 : System.Web.UI.Page
+    {
+        protected void Page_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        protected void Button1_Click(object sender, EventArgs e)
+        {
+            Sample myform = new Sample();
+            string a = (TextBox2.Text).ToString();
+            string b = (TextBox3.Text).ToString();
+            string c = (TextBox1.Text).ToString();
+            int d = Convert.ToInt32((TextBox4.Text).ToString());
+            myform.db_insert(a, b, c, d);
+            Label1.Text = "Data inserted successfully";
+        }
+
+        protected void Button2_Click(object sender, EventArgs e)
+        {
+            Sample myserv = new Sample();
+            XmlDocument xmlDoc = new XmlDocument();
+            xmlDoc.LoadXml(myserv.Get_student());
+            DataSet ds = new DataSet();
+            XmlNodeReader xmlreader = new XmlNodeReader(xmlDoc);
+            ds.ReadXml(xmlreader, XmlReadMode.Auto);
+            GridView1.DataSource = ds;
+            GridView1.DataBind();
+
+        }
+    }
+}
