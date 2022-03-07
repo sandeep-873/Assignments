@@ -1,0 +1,372 @@
+Home Controller
+###############
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Web.Mvc;
+using Assignment8.Models;
+
+namespace Assignment8.Controllers
+{
+    public class HomeController : Controller
+    {
+        List<Employee> list = new List<Employee>();
+        // GET: Home
+        [HttpGet]
+        public ActionResult Index()
+        {
+            return View();
+        }
+        [HttpPost]
+        public ActionResult Index(Employee e)
+        {
+            if (ModelState.IsValid)
+            { 
+                if (e.Age<18)
+                {
+                    return RedirectToAction("errorAge");
+                }
+                else if (e.City == "Mumbai")
+                {
+                    return RedirectToAction("Index2",e);
+                }
+                else
+                {
+                    return RedirectToAction("errorCity");
+                }
+            }
+            return View(e);
+        }
+
+        public ActionResult Index2(Employee e)
+        {
+            
+            list.Add(new Employee { Id=e.Id,Name=e.Name,Age=e.Age,City=e.City});
+        }
+        public ActionResult errorAge()
+        {
+            return View();
+        }
+        public ActionResult errorCity()
+        {
+
+            return View();
+        }
+    }
+}
+
+
+
+
+
+EmployeeModel:
+#################
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Web.Mvc;
+using Assignment8.Models;
+
+namespace Assignment8.Controllers
+{
+    public class HomeController : Controller
+    {
+        List<Employee> list = new List<Employee>();
+        // GET: Home
+        [HttpGet]
+        public ActionResult Index()
+        {
+            return View();
+        }
+        [HttpPost]
+        public ActionResult Index(Employee e)
+        {
+            if (ModelState.IsValid)
+            { 
+                if (e.Age<18)
+                {
+                    return RedirectToAction("errorAge");
+                }
+                else if (e.City == "Mumbai")
+                {
+                    return RedirectToAction("Index2",e);
+                }
+                else
+                {
+                    return RedirectToAction("errorCity");
+                }
+            }
+            return View(e);
+        }
+
+        public ActionResult Index2(Employee e)
+        {
+            
+            list.Add(new Employee { Id=e.Id,Name=e.Name,Age=e.Age,City=e.City});
+            //ViewBag.Id=e.Id;
+            //ViewBag.Name = e.Name;
+            //ViewBag.Age = e.Age;
+            //ViewBag.City = e.City;
+            return View(list);
+        }
+        public ActionResult errorAge()
+        {
+            return View();
+        }
+        public ActionResult errorCity()
+        {
+
+            return View();
+        }
+    }
+}
+
+
+
+
+ErroPage:
+###########
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Web.Mvc;
+using Assignment8.Models;
+
+namespace Assignment8.Controllers
+{
+    public class HomeController : Controller
+    {
+        List<Employee> list = new List<Employee>();
+        // GET: Home
+        [HttpGet]
+        public ActionResult Index()
+        {
+            return View();
+        }
+        [HttpPost]
+        public ActionResult Index(Employee e)
+        {
+            if (ModelState.IsValid)
+            { 
+                if (e.Age<18)
+                {
+                    return RedirectToAction("errorAge");
+                }
+                else if (e.City == "Mumbai")
+                {
+                    return RedirectToAction("Index2",e);
+                }
+                else
+                {
+                    return RedirectToAction("errorCity");
+                }
+            }
+            return View(e);
+        }
+
+        public ActionResult Index2(Employee e)
+        {
+            
+            list.Add(new Employee { Id=e.Id,Name=e.Name,Age=e.Age,City=e.City});
+            //ViewBag.Id=e.Id;
+            //ViewBag.Name = e.Name;
+            //ViewBag.Age = e.Age;
+            //ViewBag.City = e.City;
+            return View(list);
+        }
+        public ActionResult errorAge()
+        {
+            return View();
+        }
+        public ActionResult errorCity()
+        {
+
+            return View();
+        }
+    }
+}
+
+
+
+
+Index view:
+##################
+@model Assignment8.Models.Employee
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    
+    <title>Index</title>
+</head>
+<body>
+    @using (Html.BeginForm("Index", "Home", FormMethod.Post)) 
+    {
+        @Html.AntiForgeryToken()
+        
+        <div class="form-horizontal" id="form">
+            <h4>Employee</h4>
+            <hr />
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            <div class="form-group">
+                @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+                </div>
+            </div>
+    
+            <div class="form-group">
+                @Html.LabelFor(model => model.Age, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Age, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Age, "", new { @class = "text-danger" })
+                </div>
+            </div>
+    
+            <div class="form-group">
+                @Html.LabelFor(model => model.City, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.City, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.City, "", new { @class = "text-danger" })
+                </div>
+            </div>
+    
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="Create" class="btn btn-default" />
+                </div>
+            </div>
+        </div>
+    }
+    
+    <div>
+        @Html.ActionLink("Back to List", "Index")
+    </div>
+</body>
+</html>
+
+
+
+
+Index view:
+#################
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index2</title>
+
+</head>
+<body>
+    <div>
+        <table border="1">
+            <thead>
+                <tr>
+                    <td> ID</td>
+                    <td>NAME</td>
+                    <td>AGE</td>
+                    <td>CITY</td>
+                </tr>
+
+
+            </thead>
+
+            <tbody>
+                <tr>
+                    @*<td>@ViewBag.Id</td>
+                        <td>@ViewBag.Name</td>
+                        <td>@ViewBag.Age</td>
+                        <td>@ViewBag.City</td>*@
+
+                    @foreach (var item in Model)
+                    {
+                        <td>@item.Id</td>
+                        <td>@item.Name</td>
+                        <td>@item.Age</td>
+                        <td>@item.City</td>
+                    }
+                </tr>
+            </tbody>
+
+        </table>
+
+    </div>
+    <p>
+        @Html.ActionLink("Back to List", "Index")
+    </p>
+</body>
+</html>
+
+
+
+Error city view:
+########################
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index2</title>
+
+</head>
+<body>
+    <div>
+        <table border="1">
+            <thead>
+                <tr>
+                    <td> ID</td>
+                    <td>NAME</td>
+                    <td>AGE</td>
+                    <td>CITY</td>
+                </tr>
+
+
+            </thead>
+
+            <tbody>
+                <tr>
+                    @*<td>@ViewBag.Id</td>
+                        <td>@ViewBag.Name</td>
+                        <td>@ViewBag.Age</td>
+                        <td>@ViewBag.City</td>*@
+
+                    @foreach (var item in Model)
+                    {
+                        <td>@item.Id</td>
+                        <td>@item.Name</td>
+                        <td>@item.Age</td>
+                        <td>@item.City</td>
+                    }
+                </tr>
+            </tbody>
+
+        </table>
+
+    </div>
+    <p>
+        @Html.ActionLink("Back to List", "Index")
+    </p>
+</body>
+</html>
