@@ -1,0 +1,311 @@
+
+1)using System;
+class program {
+   public static void Main(string[] args) {
+       Console.WriteLine("enter basic salary"); 
+       int basic_salary = Convert.ToInt32(Console.ReadLine());
+       int DA = ((basic_salary*8)/100); 
+       int TA = ((basic_salary*7)/100); 
+       int salary = basic_salary + DA + TA; 
+       if (salary>=50000 && salary<=60000 )
+       {
+           Console.WriteLine("Total Salary"+salary); 
+           Console.WriteLine("Hike is 10% of total salary"); 
+           int h = (salary*10/100)+ salary;
+           Console.WriteLine("salary after hilke is "+h); 
+           Console.ReadLine();
+       }
+       else if (salary<50000)
+       {
+           Console.WriteLine("Salary before hike is " + salary); 
+           Console.WriteLine("Hike is 8% of total salary"); 
+           int r= ((salary*8)/100)+ salary;
+           Console.WriteLine("salary after hilke is "+r); 
+       }
+       else if (salary>=100000)
+       {
+           Console.WriteLine("Salary before hike is " + salary);
+           Console.WriteLine("Hike is 5% of total salary");
+           int s = ((salary*5)/100) + salary;
+           Console.WriteLine("salary after hilke is  "+s); 
+           Console.ReadLine();
+           
+       }
+   }
+}
+
+2)
+
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System;
+using System.Linq;
+using System.Collections.Generic;
+
+class Pizzashop
+{
+    int ID;
+    string Name;
+    int cost;
+  
+    static void Main(string[] args)
+    {
+        int TotalBill = 0;
+
+        List<Pizzashop> pizzas = new List<Pizzashop>()
+        {
+             new PizzaHut {ID=101,   Name="Pizza" ,cost=800}
+             new PizzaHut {ID=401,   Name="Burger" ,cost=100},
+	     new PizzaHut {ID=301,   Name="Cold Drink" ,cost=50},
+             new PizzaHut {ID=202,   Name="Tea" ,cost=10},
+             
+        };
+        Display(pizzas);
+
+        TotalBill= pizzas.Aggregate<Pizzashop, int>(0, (sum, e) => sum += e.cost);
+        if (TotalBill <= 10000)
+        {
+            TotalBill= (TotalBill- (TotalBill*10)/100);
+            Console.WriteLine("\n\nCongrats! You got 10% deduction...");
+            Console.WriteLine("\n\tYou Bill Amount : " +TotalBill);
+        }
+        else if (TotalBill > 10000 && TotalBill < 50000)
+        {
+            TotalBill = (TotalBill - (TotalBill * 30) / 100);
+            Console.WriteLine("\n\nCongrats! You got 30% deduction...");
+            Console.WriteLine("\n\tYou Bill Amount : " + TotalBill);
+        }
+        
+    }
+
+    public static void Display(List<Pizzashop> pizzas)
+    {
+        Console.WriteLine(" Your Order ");
+        for (int i = 0; i < pizzas.Count; i++)
+        {
+            Console.Write(pizzas[i].Name + "\t");
+            Console.WriteLine(pizzas[i].cost + "\t");
+
+        }
+
+    }
+}
+
+
+
+
+3a)pgm
+
+using System;
+
+namespace fun
+{
+ class pattern1
+ {
+  static void Main(string[] args)
+  {
+   char i, j;
+   for(i='E'; i>='A'; i--)
+   {
+    for(j='A'; j<=i; j++)
+     Console.Write(j);
+    Console.WriteLine();
+   } 
+  }
+ }
+}
+
+
+
+3b)
+
+using System;
+ 
+public class AlphabetPattern
+{
+    public static void Main(string[] args)
+    {
+        int i, j, charValue;
+        charValue = 65;
+        for (i = 1; i <= 5; i++)
+        {
+            Console.WriteLine(" ");
+            for (j = 1; j <= i; j++)
+            {
+                Console.Write(" " + Convert.ToChar(charValue));
+                charValue++;
+                if (charValue == 91)
+                {
+                    break;
+                }
+            }
+        }  
+        Console.ReadLine();
+    }
+}
+
+
+3C)
+
+using System;
+
+namespace myApp
+{
+ class Program
+ {
+  static void Main(string[] args)
+  {
+   int i, j; 
+   for(i=1; i<=5; i++)
+   {
+    for(j=1; j<=i; j++)
+    Console.Write((i+j) +" ");
+    i++;
+     j--;
+    Console.WriteLine();
+   }
+  }
+ }
+}
+
+
+3D)
+using System;
+ 
+public class AlphabetPattern
+{
+    public static void Main(string[] args)
+    {
+        int i,j;
+        char c;
+        int n=5;
+ 
+        c='A';
+         for (i = 1; i < n; i++)
+         {
+          for (j = 1; j <= (i * 2 - 1); j++)
+          {
+              if (c == 'O')
+                  break;
+ 
+              Console.Write(c);
+              c++;
+          }          
+          Console.WriteLine();
+      }
+        Console.ReadLine();
+    }
+}
+ 
+
+3E)
+
+using System;
+ 
+public class Program
+{
+
+    public static void Main(string[] args)
+    {
+        for (int row = 5; row >= 1; --row)
+        {
+            for (int col = 1; col <= row; ++col)
+            {
+                Console.Write("*");
+            }
+
+            Console.WriteLine();
+        }
+    }
+}
+   
+3F)
+using System;
+
+namespace myApp
+{
+ class Program
+ {
+  static void Main(string[] args)
+  {
+   int i, j; 
+   int k = 0;
+   char[] alpha = "ABCDEFGHIJ".ToCharArray();
+   for(i=1; i<=4; i+=1) 
+   {
+    for(j=5; j>=1; j--)
+    {
+     if(j > i)
+      Console.Write(" ");
+     else
+      Console.Write(alpha[k++] +" ");
+    }
+    Console.WriteLine();
+   }
+  } 
+ }
+}
+
+
+
+4)
+
+using System;
+class program {
+    public static void Main()
+    {
+        int amount = 2040, deposit, withdraw;
+        int choice, pin = 0, x = 0;
+        Console.WriteLine("enter your 4 digit pin:");
+        pin = int.Parse(Console.ReadLine());
+        while (true)
+        {
+            Console.WriteLine("SBI atm service\n");
+            Console.WriteLine("1.balance\n");
+            Console.WriteLine("2.withdraw\n");
+            Console.WriteLine("3.deposit\n");
+            Console.WriteLine("4.cancel\n");
+            Console.WriteLine("enter you choice\n");
+            choice = int.Parse(Console.ReadLine());
+            switch (choice) 
+            {
+                case 1:
+                    Console.WriteLine("\n your current balance is RS: {0}", amount);
+                    break;
+                case 2:
+                    Console.WriteLine("\n enter your withdraw amount:");
+                    withdraw = int.Parse(Console.ReadLine());
+                    if (withdraw % 100 != 0)
+                    {
+                        Console.WriteLine("\n please enter the amount in above 100");
+                    }
+                    else if (withdraw > (amount - 1000))
+                    {
+                        Console.WriteLine("\n insufficent balance");
+                    }
+                    else
+                    {
+                        amount = amount - withdraw;
+                        Console.WriteLine("\n\n please collect your cash");
+                        Console.WriteLine("\n current balance is RS {0}",amount);
+                    }
+                    break;
+                case 3:
+                    Console.WriteLine("\n enter the deposit amount");
+                    deposit = int.Parse(Console.ReadLine());
+                    amount = amount + deposit;
+                    Console.WriteLine("your amount has been deposited successfully.");
+                    Console.WriteLine("your total balance is RS {0}",amount);
+                    break;
+                case 4:
+                    Console.WriteLine("\n thank you");
+                    break;
+            }
+        }
+        Console.WriteLine("\n\n thanks for using atm service.");
+    }
+}
