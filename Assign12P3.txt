@@ -1,0 +1,272 @@
+Controller:
+####################
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Web.Mvc;
+
+namespace Question3.Controllers
+{
+    public class HomeController : Controller
+    {
+        public ActionResult Index()
+        {
+            ViewBag.Message = "Welcome to ASP.NET MVC!";
+
+            return View();
+        }
+        public ActionResult Achievements()
+        {
+            ViewBag.Message = "Welcome to ASP.NET MVC!";
+
+            return View();
+        }
+        public ActionResult Certifications()
+        {
+
+            return View();
+        }
+        public ActionResult Internships()
+        {
+
+            return View();
+        }
+    }
+}
+
+
+
+
+
+grid controller:
+##############################
+using System;
+﻿using System.Collections.Generic;
+using System.Linq;
+using System.Web.Mvc;
+using Kendo.Mvc.Extensions;
+using Kendo.Mvc.UI;
+using Question3.Models;
+
+namespace Question3.Controllers
+{
+	public partial class GridController : Controller
+    {
+		public ActionResult Orders_Read([DataSourceRequest]DataSourceRequest request)
+		{
+			var result = Enumerable.Range(0, 50).Select(i => new OrderViewModel
+			{
+				OrderID = i,
+				Freight = i * 10,
+				OrderDate = DateTime.Now.AddDays(i),
+				ShipName = "ShipName " + i,
+				ShipCity = "ShipCity " + i
+			});
+
+			return Json(result.ToDataSourceResult(request));
+		}
+	}
+}
+
+
+
+
+
+order Model:
+############################
+using System;
+using System.ComponentModel.DataAnnotations;
+
+namespace Question3.Models
+{
+    public class OrderViewModel
+    {
+        public int OrderID
+        {
+            get;
+            set;
+        }
+        public string CustomerID { get; set; }
+
+        public string ContactName
+        {
+            get;
+            set;
+        }
+
+        public decimal? Freight
+        {
+            get;
+            set;
+        }
+
+        public string ShipAddress
+        {
+            get;
+            set;
+        }
+
+        [Required]
+        public DateTime? OrderDate
+        {
+            get;
+            set;
+        }
+
+        public DateTime? ShippedDate
+        {
+            get;
+            set;
+        }
+
+        public string ShipCountry
+        {
+            get;
+            set;
+        }
+
+        public string ShipCity
+        {
+            get;
+            set;
+        }
+
+        public string ShipName
+        {
+            get;
+            set;
+        }
+
+        public int? EmployeeID
+        {
+            get;
+            set;
+        }
+    }
+}
+
+
+
+
+
+
+Acheivement view:
+###############################
+
+@{
+    ViewBag.Title = "Achievements";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Achievements</h1>
+<img src="~/Photos/achievement.jpg" width=" 500" height="300"/>
+<ul id="treeView">
+    <li>
+        Cerfications
+        <ul>
+            <li>PLC certificate </li>
+            <li>C Program certificate</li>
+            <li>C++ Program certificate</li>
+            <li>Python certificate</li>
+            <li>HTML and CSS</li>
+        </ul>
+    </li>
+    <li>
+        Internship
+        <ul>
+            <li>Python</li>
+            <li>IOT</li>
+        </ul>
+    </li>
+    <li>
+        Workshops
+        <ul>
+            <li>PLC </li>
+            <li>SCADA</li>
+            <li>PCB</li>
+            <li>SCADA</li>
+        </ul>
+    </li>
+</ul>
+
+<script>
+$(document).ready(function() {
+    $("#treeView").kendoTreeView();
+});
+</script>
+
+
+
+
+
+certificate view:
+#################################
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div>
+
+
+    <h1 style="color:black;">
+        Certifications
+    </h1>
+    <h2>PLC Certificate</h2>
+    <center>
+        <img src="~/Photos/Certification_Img.png" width=" 500" height="300" />
+    </center>
+
+
+    The Electronics Engineering Technology – Basic Programmable Logic Controller (PLC) Certificate focuses primarily on programmable logic controllers (PLCs). The certificate option is suited for the student whose primary interest is in digital automation of industrial electromechanical processes or
+    for the student who has basic electronic experience and needs to upgrade in the digital and computer area.
+
+    <br />
+    All certificate courses are creditable toward the diploma or associate degree that the College is approved to offer.
+    <br />
+    <center>
+
+        <img src="~/Photos/certificate2.png" width=" 500" height="300" />
+    </center>
+    <img src="~/Photos/Python.png" width=" 500" height="300" />
+    <br />
+    Python was developed by Guido van Rossum in the late eighties and early nineties at the National Research Institute for Mathematics and Computer Science in the Netherlands.
+
+    Python is derived from many other languages, including ABC, Modula-3, C, C++, Algol-68, SmallTalk, and Unix shell and other scripting languages.
+
+    Python is copyrighted. Like Perl, Python source code is now available under the GNU General Public License (GPL).
+
+    Python is now maintained by a core development team at the institute, although Guido van Rossum still holds a vital role in directing its progress.
+</div>
+
+
+
+
+
+
+internship view:
+#########################
+
+@{
+    ViewBag.Title = "Achievements";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<div>
+
+    <h1 style="color:black;">
+        Internship
+    </h1>
+    <p>
+        An internship is a period of work experience offered by an organization for a limited period of time.[1] Once confined to medical graduates,
+        internship is used practice for a wide range of placements in businesses, non-profit organizations and government agencies.
+        They are typically undertaken by students and graduates looking to gain relevant skills and experience in a particular field.
+        Employers benefit from these placements because they often recruit employees from their best interns, who have known capabilities, thus saving time and money in the long run.
+        Internships are usually arranged by third-party organizations that recruit interns on behalf of industry groups. Rules vary from country to country about when interns should be regarded as employees.
+        The system can be open to exploitation by unscrupulous employers
+    </p>
+
+    <img src="~/Photos/Inter1.jpg"  width=" 400" height="300" />
+    <img src="~/Photos/inter2.jpg"  width=" 400" height="300"/>
+</div>
