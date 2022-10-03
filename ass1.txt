@@ -33,7 +33,7 @@ function validate(age){
     <script>
         var age=19;
         var status=validate(age);
-        document.write("You are "+status+" for Vote");
+        document.write("You are "+status+" for Vote..");
     </script>
 </body>
 
